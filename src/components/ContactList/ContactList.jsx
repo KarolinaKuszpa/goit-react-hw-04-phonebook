@@ -1,20 +1,23 @@
 import React from 'react';
 import styles from './ContactList.module.css';
 
-const Filter = ({ filterValue, setFilter }) => {
+const ContactList = ({ contacts, deleteContact }) => {
   return (
-    <div className={styles.filter}>
-      <label className={styles.label}>
-        Find contacts by name:
-        <input
-          type="text"
-          value={filterValue}
-          onChange={e => setFilter(e.target.value)}
-          className={styles.input}
-        />
-      </label>
-    </div>
+    <ul className={styles.list}>
+      {contacts.map(contact => (
+        <li key={contact.id} className={styles.item}>
+          <span>{contact.name}:</span> {contact.number}
+          <button
+            type="button"
+            className={styles.button}
+            onClick={() => deleteContact(contact.id)}
+          >
+            Delete
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 };
 
-export default Filter;
+export default ContactList;
